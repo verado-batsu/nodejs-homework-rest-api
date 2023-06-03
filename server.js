@@ -7,6 +7,7 @@ const DB_HOST = "mongodb+srv://Verado:GHjxVgJt3a2g7nVt@cluster0.njgfjxc.mongodb.
 mongoose.connect(DB_HOST)
 	.then(() => {
 		app.listen(3000)
+		console.log('Database connection successful')
 	})
 	.catch((error) => {
 		console.log(error.message);
