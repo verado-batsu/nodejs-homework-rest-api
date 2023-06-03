@@ -15,12 +15,14 @@ const router = express.Router()
 
 router.get('/', getAllContacts)
 
-router.get('/:contactId', getOneContactById)
+// router.get('/:contactId', getOneContactById)
+
+
 
 router.post('/', validateBody(contactAddSchema), addNewContact)
 
-router.delete('/:contactId', deleteContactById)
+// router.delete('/:contactId', deleteContactById)
 
-router.put('/:contactId', validateBody(contactAddSchema), updateContactbyId)
+// router.put('/:contactId', validateBody(contactAddSchema), updateContactbyId)
 
 module.exports = router;
