@@ -6,7 +6,7 @@ const {
 	deleteContactById,
 	updateContactbyId,
 	updateStatusContact
-} = require('../../controllers/contacts-controller');
+} = require('../../controllers/Contacts');
 
 const {contactAddSchema, contactUpdateFavoriteSchema} = require('../../schemas/contacts');
 
