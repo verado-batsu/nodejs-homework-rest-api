@@ -13,8 +13,6 @@ const {contactAddSchema, contactUpdateFavoriteSchema} = require('../../schemas/c
 const { validateBody, validateBodyFavorite } = require('../../decorators');
 const {isValidId} = require("../../middlewares")
 
-
-
 const router = express.Router()
 
 router.get('/', getAllContacts)
