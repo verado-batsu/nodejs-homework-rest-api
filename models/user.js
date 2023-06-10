@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 
 const { handleMongooseError } = require("../middlewares")
 
-const {emailRegexp} = require('../constants/user')
+const {emailRegexp, subscriptionList} = require('../constants/user')
 
 const userSchema = new Schema({
 	password: {
@@ -17,7 +17,7 @@ const userSchema = new Schema({
 	},
 	subscription: {
 		type: String,
-		enum: ["starter", "pro", "business"],
+		enum: subscriptionList,
 		default: "starter"
 	},
 	token: String
