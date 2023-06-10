@@ -14,4 +14,6 @@ router.post('/register', validateBody(userRegisterSchema), register)
 
 router.post('/login', validateBody(userRegisterSchema), login)
 
+router.post('/logout', validateBody(userRegisterSchema), login)
+
 module.exports = router;
