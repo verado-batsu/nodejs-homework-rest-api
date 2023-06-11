@@ -11,11 +11,11 @@ const {
 const {contactAddSchema, contactUpdateFavoriteSchema} = require('../../schemas/contacts');
 
 const { validateBody, validateBodyFavorite } = require('../../decorators');
-const {isValidId} = require("../../middlewares")
-
-
+const { isValidId, authenticate } = require("../../middlewares")
 
 const router = express.Router()
+
+router.use(authenticate);
 
 router.get('/', getAllContacts)
 
