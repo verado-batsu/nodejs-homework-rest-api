@@ -1,12 +1,14 @@
 const bcrypt = require('bcrypt');
 const { User } = require("../../models");
 const gravatar = require('gravatar');
-const nanoid = require('nanoid');
+const { nanoid } = require('nanoid');
 
 const { HttpError, sendEmail } = require("../../helpers");
 
+const { BASE_URL } = process.env;
+
 const register = async (req, res) => {
-	const { email, password } = req.body;
+	const { email, password } = req.body; 
 	const user = await User.findOne({ email })
 	if (user) {
 		throw HttpError(409, "Email in use");
@@ -22,10 +24,10 @@ const register = async (req, res) => {
 	const verifyEmail = {
 		to: email,
 		subject: 'Verify email',
-		html: `<a target="_blank" href="http://localhost:3000/api/users/verify/${verificationToken}">Click to Verify Email</a>`
+		html: `<a target="_blank" href="${BASE_URL}/api/users/verify/${verificationToken}">Click to Verify Email</a>`
 	}
 	
-	sendEmail(verifyEmail)
+	await sendEmail(verifyEmail);
 
 	res.status(201).json({
 		user: {

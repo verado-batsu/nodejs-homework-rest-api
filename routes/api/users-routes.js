@@ -1,7 +1,7 @@
 const express = require('express');
 
 const { validateBody } = require('../../decorators');
-const { userRegisterSchema, userSubscriptionSchema } = require('../../schemas/users');
+const { userRegisterSchema, userSubscriptionSchema, userEmailSchema } = require('../../schemas/users');
 
 const {
 	register,
@@ -9,7 +9,9 @@ const {
 	logout,
 	getCurrent,
 	updateSubscription,
-	updateAvatar
+	updateAvatar,
+	verify,
+	resendVerify
 } = require('../../controllers/users')
 
 const { authenticate, upload } = require("../../middlewares");
@@ -28,6 +30,8 @@ router.patch('/subscription', authenticate, validateBody(userSubscriptionSchema)
 
 router.patch('/avatars', authenticate, upload.single('avatar'), updateAvatar)
 
-router.get('/verify/:verificationToken', )
+router.get('/verify/:verificationToken', verify)
+
+router.post('/verify', validateBody(userEmailSchema), resendVerify)
 
 module.exports = router;
