@@ -1,17 +1,20 @@
 const express = require('express');
 
 const { validateBody } = require('../../decorators');
-const { userRegisterSchema, userSubscriptionSchema } = require('../../schemas/users');
+const { userRegisterSchema, userSubscriptionSchema, userEmailSchema } = require('../../schemas/users');
 
 const {
 	register,
 	login,
 	logout,
 	getCurrent,
-	updateSubscription
+	updateSubscription,
+	updateAvatar,
+	verify,
+	resendVerify
 } = require('../../controllers/users')
 
-const { authenticate } = require("../../middlewares");
+const { authenticate, upload } = require("../../middlewares");
 
 const router = express.Router()
 
@@ -24,5 +27,11 @@ router.post('/logout', authenticate, logout)
 router.get('/current', authenticate, getCurrent)
 
 router.patch('/subscription', authenticate, validateBody(userSubscriptionSchema), updateSubscription)
+
+router.patch('/avatars', authenticate, upload.single('avatar'), updateAvatar)
+
+router.get('/verify/:verificationToken', verify)
+
+router.post('/verify', validateBody(userEmailSchema), resendVerify)
 
 module.exports = router;
